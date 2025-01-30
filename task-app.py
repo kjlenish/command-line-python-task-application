@@ -66,7 +66,7 @@ class DB:
 def main():
     db = DB()
     while True:
-        print("1. Add a task\n2. View all tasks\n3. Update task\n4. Delete task\n5. Filter by status\n6. Search task\n7. Exit\n")
+        print("\n\n1. Add a task\n2. View all tasks\n3. View Pending tasks\n4. View Completed tasks\n5.Update task\n6. Delete task\n7. Search task\n8. Exit\n")
         choice = int(input("Make your choice: "))
         if choice == 1:
             description = input("Enter the description: ")
@@ -78,28 +78,31 @@ def main():
             db.view_tasks()
         
         elif choice == 3:
+            db.filter_by_status("pending")
+        
+        elif choice == 4:
+            db.filter_by_status("completed")
+        
+        elif choice == 5:
             id = input("Enter the id of the task: ")
             description = input("Enter the new description: ")
             status = input("Enter the new status (pending/completed): ")
             db.update_task(id, description, status)
         
-        elif choice == 4:
+        elif choice == 6:
             id = input("Enter the id of the task: ")            
             db.delete_task(id)
         
-        elif choice == 5:
-            status = str(input("Enter the status (pending/completed) you want to filter by: "))
-            db.filter_by_status(status)
-        
-        elif choice == 6:
+        elif choice == 7:
             pattern = input("Enter the search string: ")
             db.search_tasks(pattern)
         
-        elif choice == 7:
+        elif choice == 8:
             del db
             exit()
         else:
             print("Invalid choice, try again")
+    del db
             
 
 main()
